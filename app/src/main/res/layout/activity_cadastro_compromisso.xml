@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="agenda.com.br.agenda.br.com.activity.CadastroCompromisso">
+
+    <Button android:id="@+id/btnDataHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione a Data: "
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/displayDate" />
+
+    <TextView
+        android:id="@+id/displayDate"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/btnDataHora"
+        android:layout_marginStart="44dp" />
+
+    <EditText
+        android:id="@+id/btndescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:layout_below="@+id/btnDataHora"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp" />
+
+    <EditText
+        android:id="@+id/btncontato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Selecione Contato "
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/btndescricao"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:layout_below="@+id/btncontato"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
+    <Button
+        android:text="Ver Compromissos Cadastrados"
+        android:id="@+id/btnVerCompromissos"
+        android:layout_below="@+id/btnSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

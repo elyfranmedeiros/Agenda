@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="agenda.com.br.agenda" >
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".br.com.activity.CadastroCompromisso"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".br.com.activity.ListaDeCompromissos"
+            android:label="@string/title_activity_lista_de_compromissos" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".br.com.activity.ActivityTeste"
+            android:label="@string/title_activity_activity_teste" >
+        </activity>
+        <activity
+            android:name=".br.com.activity.DetalheCompromisso"
+            android:label="@string/title_activity_detalhe" >
+        </activity>
+    </application>
+
+</manifest>
