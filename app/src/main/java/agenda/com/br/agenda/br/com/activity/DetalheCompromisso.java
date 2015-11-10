@@ -37,6 +37,7 @@ public class DetalheCompromisso extends ActionBarActivity {
         txtDesc.setText(bundle.getString("descricao"));
         txtCont.setText(bundle.getString("contato"));
         txtData.setText(bundle.getString("data"));
+        //teste
 
 
     }
