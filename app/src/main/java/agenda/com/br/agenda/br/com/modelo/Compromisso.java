@@ -9,16 +9,16 @@ import java.sql.Date;
 public class Compromisso implements Serializable {
 
 
-    private int id;
+    private Long id;
     private String descricao;
     private String data;
     private String contato;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

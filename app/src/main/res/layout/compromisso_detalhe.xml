@@ -8,25 +8,59 @@
     tools:context="agenda.com.br.agenda.br.com.activity.DetalheCompromisso">
 
     <TextView
-        android:id="@+id/txtDescricao"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Data: "
+        android:id="@+id/textDt"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/txtContato"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtDescricao"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/txtData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtContato"
-        android:layout_alignParentEnd="true"
-         />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtReferDt"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/txtcnt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Descrição: "
+        android:id="@+id/txtdesc"
+        android:layout_below="@+id/textDt"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp"
+        android:phoneNumber="false" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtReferDesc"
+        android:layout_alignTop="@+id/txtdesc"
+        android:layout_toEndOf="@+id/txtdesc"
+        android:layout_marginStart="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Contato: "
+        android:id="@+id/txtcnt"
+        android:layout_below="@+id/txtdesc"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtReferContato"
+        android:layout_alignTop="@+id/txtcnt"
+        android:layout_toEndOf="@+id/txtdesc" />
+
 
 </RelativeLayout>

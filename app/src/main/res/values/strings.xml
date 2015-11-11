@@ -10,4 +10,5 @@
     <string name="title_activity_lista_de_compromissos">ListaDeCompromissos</string>
     <string name="title_activity_activity_teste">ActivityTeste</string>
     <string name="title_activity_detalhe">DetalheActivity</string>
+    <string name="title_activity_edicao">EdicaoActivity</string>
 </resources>

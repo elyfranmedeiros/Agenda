@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,26 +27,21 @@ public class ListaDeCompromissos extends ActionBarActivity {
     String descricao, contato, data;
     List<Compromisso> compromissos;
     CompromissoDAO dao;
+    private ListView listCompromissos;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_compromissos);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        dao = new CompromissoDAO(this);
-        compromissos = dao.buscaCompromisso();
-        dao.close();
 
-        final ListView listView = (ListView) findViewById(R.id.listaCompromissos);
-        final ArrayAdapter<Compromisso> adapter = new ArrayAdapter<Compromisso>(this, android.R.layout.simple_list_item_1, compromissos);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        carregaCompromisso();
+        listCompromissos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Compromisso compromisso = compromissos.get(position);
@@ -66,19 +63,51 @@ public class ListaDeCompromissos extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
+        registerForContextMenu(listCompromissos);
 
     }
-    private void exibeCompromisso(Compromisso compromisso) {
 
-        StringBuilder str = new StringBuilder();
-        str.append("Descrição: " + compromisso.getDescricao() + "\n");
-        str.append("Data: " + compromisso.getData() +"\n");
-        str.append("Contato: " + compromisso.getContato() + "\n");
-        AlertDialog.Builder msg = new AlertDialog.Builder(ListaDeCompromissos.this);
-        msg.setTitle("Detalhes do Compromisso");
-        msg.setMessage(str.toString());
-        msg.setNeutralButton("OK", null);
-        msg.show();
+    private void carregaCompromisso() {
+        dao = new CompromissoDAO(this);
+        compromissos = dao.buscaCompromisso();
+        dao.close();
+        listCompromissos = (ListView) findViewById(R.id.listaCompromissos);
+        ArrayAdapter<Compromisso> adapter = new ArrayAdapter<Compromisso>(this, android.R.layout.simple_list_item_1, compromissos);
+        listCompromissos.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem menuDel = menu.add("Deletar");
+        menuDel.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                Compromisso compromisso = (Compromisso) listCompromissos.getItemAtPosition(info.position);
+
+                CompromissoDAO dao = new CompromissoDAO(ListaDeCompromissos.this);
+                dao.deleteCompromisso(compromisso);
+                dao.close();
+                carregaCompromisso();
+                return false;
+            }
+        });
+
+        MenuItem menuEdit = menu.add("Editar");
+        menuEdit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                Compromisso compromisso = (Compromisso) listCompromissos.getItemAtPosition(info.position);
+
+                Intent intent = new Intent(ListaDeCompromissos.this, CadastroCompromisso.class);
+                intent.putExtra("compromisso", compromisso);
+                startActivity(intent);
+
+                return false;
+            }
+        });
+
+
     }
 }

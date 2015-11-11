@@ -1,6 +1,5 @@
 package agenda.com.br.agenda.br.com.activity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,22 +22,16 @@ public class DetalheCompromisso extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisso_detalhe);
 
-        /*dao = new CompromissoDAO(this);
-        compromissos = dao.buscaCompromisso();
-        dao.close();*/
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        TextView txtDesc = (TextView) findViewById(R.id.txtDescricao);
-        TextView txtCont = (TextView) findViewById(R.id.txtContato);
-        TextView txtData = (TextView) findViewById(R.id.txtData);
+        TextView txtDesc = (TextView) findViewById(R.id.txtReferDesc);
+        TextView txtCont = (TextView) findViewById(R.id.txtReferContato);
+        TextView txtData = (TextView) findViewById(R.id.txtReferDt);
 
         txtDesc.setText(bundle.getString("descricao"));
         txtCont.setText(bundle.getString("contato"));
         txtData.setText(bundle.getString("data"));
-        //teste
-
 
     }
 }

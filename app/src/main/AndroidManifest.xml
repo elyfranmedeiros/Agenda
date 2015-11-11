@@ -31,6 +31,10 @@
             android:name=".br.com.activity.DetalheCompromisso"
             android:label="@string/title_activity_detalhe" >
         </activity>
+        <activity
+            android:name=".br.com.activity.EdicaoActivity"
+            android:label="@string/title_activity_edicao" >
+        </activity>
     </application>
 
 </manifest>

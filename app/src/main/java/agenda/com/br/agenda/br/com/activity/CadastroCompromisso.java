@@ -58,23 +58,31 @@ public class CadastroCompromisso extends Activity {
         campDescricao = (EditText) findViewById(R.id.btndescricao);
         campContato = (EditText) findViewById(R.id.btncontato);
 
+        Intent intent = getIntent();
+        compromisso = (Compromisso) intent.getSerializableExtra("compromisso");
+        if(compromisso != null) {
+            campDescricao.setText(compromisso.getDescricao());
+            campContato.setText(compromisso.getContato());
+            pDisplayDate.setText(compromisso.getData());
+        }
         Button btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CompromissoDAO dao = new CompromissoDAO(CadastroCompromisso.this);
-                Compromisso compromisso = new Compromisso();
                 compromisso.setDescricao(campDescricao.getText().toString());
                 compromisso.setContato(campContato.getText().toString());
                 compromisso.setData(pDisplayDate.getText().toString());
-                dao.insere(compromisso);
+                if(compromisso.getId() != null){
+                    dao.editar(compromisso);
+                }else{
+                    dao.insere(compromisso);
+                }
                 dao.close();
-
-               finish();
+                Intent intent = new Intent(CadastroCompromisso.this, ListaDeCompromissos.class);
+                startActivity(intent);
             }
         });
-
     }
 
     @Override
