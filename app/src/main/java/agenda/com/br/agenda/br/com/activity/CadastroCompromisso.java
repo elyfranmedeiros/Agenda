@@ -1,41 +1,36 @@
 package agenda.com.br.agenda.br.com.activity;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import agenda.com.br.agenda.R;
 import agenda.com.br.agenda.br.com.DAO.CompromissoDAO;
 import agenda.com.br.agenda.br.com.modelo.Compromisso;
 
-public class CadastroCompromisso extends Activity {
+public class CadastroCompromisso extends ActionBarActivity {
+
+    static final int DIALOG_ID = 0;
 
     private TextView pDisplayDate;
-    private Button pPickDate;
     private int pYear;
     private int pMonth;
     private int pDay;
-
     private Compromisso compromisso;
-    static final int DIALOG_ID = 0;
     private EditText campDescricao;
     private EditText campContato;
     final Calendar cal = Calendar.getInstance();
     private Button btnDataHora;
-    private List<Compromisso> compromissos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +53,8 @@ public class CadastroCompromisso extends Activity {
         campDescricao = (EditText) findViewById(R.id.btndescricao);
         campContato = (EditText) findViewById(R.id.btncontato);
 
-        Intent intent = getIntent();
-        compromisso = (Compromisso) intent.getSerializableExtra("compromisso");
-        if(compromisso != null) {
+        compromisso = recuperaCompromissoSelecionado();
+        if (compromisso != null) {
             campDescricao.setText(compromisso.getDescricao());
             campContato.setText(compromisso.getContato());
             pDisplayDate.setText(compromisso.getData());
@@ -70,12 +64,10 @@ public class CadastroCompromisso extends Activity {
             @Override
             public void onClick(View v) {
                 CompromissoDAO dao = new CompromissoDAO(CadastroCompromisso.this);
-                compromisso.setDescricao(campDescricao.getText().toString());
-                compromisso.setContato(campContato.getText().toString());
-                compromisso.setData(pDisplayDate.getText().toString());
-                if(compromisso.getId() != null){
+                Compromisso compromisso = preencheCompromisso();
+                if (compromisso.getId() != null) {
                     dao.editar(compromisso);
-                }else{
+                } else {
                     dao.insere(compromisso);
                 }
                 dao.close();
@@ -83,6 +75,22 @@ public class CadastroCompromisso extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @NonNull
+    private Compromisso preencheCompromisso() {
+        Compromisso compromisso = new Compromisso();
+        compromisso.setDescricao(campDescricao.getText().toString());
+        compromisso.setContato(campContato.getText().toString());
+        compromisso.setData(pDisplayDate.getText().toString());
+        return compromisso;
+    }
+
+    private Compromisso recuperaCompromissoSelecionado() {
+        Compromisso compromisso = new Compromisso();
+        Intent intent = getIntent();
+        compromisso = (Compromisso) intent.getSerializableExtra("compromisso");
+        return compromisso;
     }
 
     @Override
