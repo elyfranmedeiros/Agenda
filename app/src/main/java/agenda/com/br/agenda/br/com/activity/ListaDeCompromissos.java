@@ -1,5 +1,6 @@
 package agenda.com.br.agenda.br.com.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -53,7 +54,7 @@ public class ListaDeCompromissos extends ActionBarActivity implements SearchView
                 bundle.putString("contato", compromisso.getContato());
                 bundle.putString("data", compromisso.getData());
                 intent.putExtras(bundle);
-                String dataVerificar = verificaData(compromisso);
+                verificaData(compromisso);
                 startActivity(intent);
             }
         });
@@ -69,15 +70,39 @@ public class ListaDeCompromissos extends ActionBarActivity implements SearchView
 
     }
 
-    private String verificaData(Compromisso compromisso) {
+    private void verificaData(Compromisso compromisso) {
+        boolean  maior = false;
         String str = compromisso.getData();
         String[] split = str.split("/");
-        for(int i = 0; i < split.length; i++){
-            str = split[i];
-        }
-            return str;
-        //cal.get(Calendar.DAY_OF_MONTH);
+        int dia = 0;
+        int mes = 0;
+        int ano = 0;
 
+        pYear = cal.get(Calendar.YEAR);
+        pMonth = cal.get(Calendar.MONTH) + 1;
+        pDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        dia = Integer.parseInt(split[0]);
+        mes = Integer.parseInt(split[1]);
+        ano = Integer.parseInt(split[2].trim());
+
+        boolean isAnoMaior = ano < pYear;
+        boolean isMesAnterior = ((ano == pYear) && (mes < pMonth));
+        boolean isDiaAnterior = ((ano == pYear) && (mes == pMonth) && ((dia + 1) == pDay));
+        boolean diaJaPassou = ((ano == pYear) && (mes == pMonth) && (dia < pDay));
+
+        if(isAnoMaior){
+            Toast.makeText(this, "Compromisso foi ano passado, a data desse compromisso era: " + dia + "/" + mes + "/" + ano, Toast.LENGTH_LONG).show();
+        }else if(isMesAnterior){
+                Toast.makeText(this, "Compromisso foi mês passado", Toast.LENGTH_LONG).show();
+        }else if(diaJaPassou){
+                Toast.makeText(this, "O dia do seu compromisso era Ontem!!", Toast.LENGTH_LONG).show();
+        }else if(isDiaAnterior){
+                Toast.makeText(this, "Lembre-se, seu compromisso é amanhã", Toast.LENGTH_LONG).show();
+        }
+        /*else if((ano == pYear) && (mes == pMonth) && ((dia + 1) == pDay)){
+            Toast.makeText(this, "Lembre-se, seu compromisso é amanhã", Toast.LENGTH_LONG).show();
+        }*/
         /*str.append(String.valueOf(pYear = cal.get(Calendar.YEAR)));
         str.append(String.valueOf(pMonth = cal.get(Calendar.MONTH) + 1));
         str.append(String.valueOf(pDay = cal.get(Calendar.DAY_OF_MONTH)));*/

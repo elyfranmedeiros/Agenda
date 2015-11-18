@@ -8,22 +8,22 @@
     tools:context="agenda.com.br.agenda.br.com.activity.ActivityTeste"
     android:orientation="vertical">
 
-    <Button android:id="@+id/pickDate"
+    <Button android:id="@+id/btnCont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecione a Data: "
+        android:text="Selecione o Contato: "
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/displayDate" />
+        android:layout_alignBottom="@+id/displayCont" />
 
     <TextView
-        android:id="@+id/displayDate"
+        android:id="@+id/displayCont"
         android:layout_width="193dp"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:layout_gravity="right"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/pickDate"
+        android:layout_toEndOf="@+id/btnCont"
         android:layout_marginStart="44dp" />
 
 </RelativeLayout>
